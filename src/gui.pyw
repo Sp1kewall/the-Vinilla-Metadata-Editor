@@ -49,7 +49,7 @@ class File:
         window.title("Audio numbering")
 
         if sys.platform.lower() == "darwin":
-            window.iconbitmap(default="resources/macos.icns")
+            pass
         else:
             window.iconbitmap(default="resources/icon.ico")
 
@@ -220,7 +220,7 @@ class Make:
         CfgWindow = Tk()
 
         if sys.platform.lower() == "darwin":
-            CfgWindow.iconbitmap(default="resources/macos.icns")
+            pass
         else:
             CfgWindow.iconbitmap(default="resources/icon.ico")
         
@@ -338,7 +338,7 @@ def main():
     root.geometry("450x300")
 
     if sys.platform.lower() == "darwin":
-        root.iconbitmap(default="resources/macos.icns")
+        pass
     else:
         root.iconbitmap(default="resources/icon.ico")
     
