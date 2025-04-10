@@ -160,6 +160,7 @@ cython_debug/
 #.idea/
 
 # OS shitty files
+buildscripts/
 buildscripts/win.bat
 buildscripts/linux.sh
 buildscripts/macos.sh
