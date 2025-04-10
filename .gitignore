@@ -162,3 +162,4 @@ cython_debug/
 # OS shitty files
 .DS_Store
 desktop.ini
+icon.ico
