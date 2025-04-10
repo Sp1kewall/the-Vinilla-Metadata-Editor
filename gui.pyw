@@ -20,7 +20,6 @@ class File:
             messagebox.showwarning(title="Config", message="Configuration file is not selected")
         
         else:
-            # cfgpath = data.Album.GetInfo(tmp.name).name
             cfgpath = tmp.name
             messagebox.showinfo(title="Config", message="Config file is loaded")
 
@@ -213,7 +212,6 @@ class Make:
         CfgWindow.title("Album Configuration")
         CfgWindow.resizable(False, False)
 
-        # Список для хранения данных
         album_data = []
 
         def select_output():
@@ -225,7 +223,6 @@ class Make:
                 output_entry.delete(0, "end")
                 output_entry.insert(0, output)
 
-        # Функция для выбора обложки
         def select_cover():
             cover_path = filedialog.askopenfilename(
                 title="Select Cover Image",
@@ -235,7 +232,6 @@ class Make:
                 cover_path_entry.delete(0, "end")
                 cover_path_entry.insert(0, cover_path)
 
-        # Функция для сохранения данных в список
         def save_to_list():
             title = title_entry.get()
             year = year_entry.get()
@@ -246,12 +242,10 @@ class Make:
 
             print(title, year, author, cover_path, artist, output)
 
-            # Проверка обязательных полей
             if not title or not year or not author or not artist:
                 messagebox.showwarning("Error", "All fields except Cover Path are required!")
                 return
 
-            # Сохраняем данные в список в указанном порядке
             album_data.append(title)
             album_data.append(year)
             album_data.append(author)
@@ -263,9 +257,7 @@ class Make:
 
             CfgWindow.destroy()
 
-            # Поля НЕ очищаются, чтобы данные оставались для редактирования
 
-        # Поля для ввода
         Label(CfgWindow, text="Artist:").grid(row=0, column=0, padx=10, pady=5, sticky="e")
         artist_entry = Entry(CfgWindow, width=40)
         artist_entry.grid(row=0, column=1, padx=10, pady=5)
@@ -292,10 +284,8 @@ class Make:
         output_entry.grid(row=5, column=1, padx=10, pady=5)
         Button(CfgWindow, text="Browse", command=select_output).grid(row=5, column=2, padx=10, pady=5)
 
-        # Кнопка для сохранения данных в список
         Button(CfgWindow, text="Make Config", command=save_to_list).grid(row=6, column=1, pady=10)
 
-        # Кнопка для закрытия окна
         Button(CfgWindow, text="Close", command=CfgWindow.destroy).grid(row=7, column=1, pady=10)
 
         CfgWindow.mainloop()
