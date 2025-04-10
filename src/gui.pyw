@@ -11,6 +11,7 @@ albumpath = None
 AlbumData = None
 
 
+
 class File:
     def OpenConfig():
         global cfgpath
@@ -312,14 +313,15 @@ class Make:
         pack.pack(albumpath, output, cfgpath)
 
         return
-        
 
-        
+
+
+
 def main():
     root = Tk()
 
     root.title("Vinylla")
-    root.geometry("400x400")
+    root.geometry("450x300")
     root.resizable(False, False)
 
     file_menu = Menu(tearoff=0)
@@ -339,6 +341,50 @@ def main():
 
     root.config(menu=main_menu)
 
+    label1 = Label(
+        root, 
+        text="1. Open album folder", 
+        font=('Lexend', 14, 'bold'),
+        anchor='w',
+        padx=20
+    )
+    label1.pack(fill='x', pady=10)
+
+    label2 = Label(
+        root, 
+        text="2. Open config file (create if doesn't exist)", 
+        font=('Lexend', 14, 'bold'),
+        anchor='w',
+        padx=20
+    )
+    label2.pack(fill='x', pady=10)
+
+    label3 = Label(
+        root, 
+        text="3. Build the album!", 
+        font=('Lexend', 14, 'bold'),
+        anchor='w',
+        padx=20
+    )
+    label3.pack(fill='x', pady=10)
+
+    footer_label = Label(
+        root,
+        text=f"the Vinylla Metadata Editor (VME) Version {version} {VersionType}",
+        font=('Lexend', 8, 'italic'),
+        fg='gray',
+        anchor='center',
+        pady=10
+    )
+    footer_label.pack(side='bottom', fill='x')
+
     root.mainloop()
 
-main()
+
+
+
+if __name__ == "__main__":
+    version = "0.1"
+    VersionType = "beta"
+
+    main()
