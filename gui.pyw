@@ -328,7 +328,7 @@ class Make:
 def main():
     root = Tk()
 
-    root.title("Vinilla")
+    root.title("Vinylla")
     root.geometry("400x400")
     root.resizable(False, False)
 
