@@ -4,7 +4,7 @@ from tkinter import filedialog
 
 import cfgmake, data, pack
 
-import os, eyed3
+import os, eyed3, sys
 
 cfgpath = None
 albumpath = None
@@ -21,8 +21,11 @@ class File:
             messagebox.showwarning(title="Config", message="Configuration file is not selected")
         
         else:
-            cfgpath = tmp.name
-            messagebox.showinfo(title="Config", message="Config file is loaded")
+            if (tmp.name).split(".")[-1].lower() != "yaml":
+                messagebox.showwarning(title="Config", message="Configuration file is not selected")
+            else:
+                cfgpath = tmp.name
+                messagebox.showinfo(title="Config", message="Config file is loaded")
 
 
 
@@ -44,6 +47,11 @@ class File:
     def ChangeMusicNumbering():
         window = Tk()
         window.title("Audio numbering")
+
+        if sys.platform.lower() == "darwin":
+            window.iconbitmap(default="resources/macos.icns")
+        else:
+            window.iconbitmap(default="resources/icon.ico")
 
         custom_font = font.Font(size=12)
 
@@ -210,6 +218,12 @@ class Make:
 
     def CreateAlbumConfig():
         CfgWindow = Tk()
+
+        if sys.platform.lower() == "darwin":
+            CfgWindow.iconbitmap(default="resources/macos.icns")
+        else:
+            CfgWindow.iconbitmap(default="resources/icon.ico")
+        
         CfgWindow.title("Album Configuration")
         CfgWindow.resizable(False, False)
 
@@ -322,6 +336,12 @@ def main():
 
     root.title("Vinylla")
     root.geometry("450x300")
+
+    if sys.platform.lower() == "darwin":
+        root.iconbitmap(default="resources/macos.icns")
+    else:
+        root.iconbitmap(default="resources/icon.ico")
+    
     root.resizable(False, False)
 
     file_menu = Menu(tearoff=0)
