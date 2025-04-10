@@ -160,9 +160,10 @@ cython_debug/
 #.idea/
 
 # OS shitty files
+buildscripts/win.bat
+buildscripts/linux.sh
+buildscripts/macos.sh
+
 .DS_Store
 desktop.ini
 icon.ico
-win.bat
-linux.sh
-macos.sh
