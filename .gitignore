@@ -163,6 +163,7 @@ cython_debug/
 buildscripts/win.bat
 buildscripts/linux.sh
 buildscripts/macos.sh
+resources/
 
 .DS_Store
 desktop.ini
