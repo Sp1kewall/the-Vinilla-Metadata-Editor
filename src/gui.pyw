@@ -1,6 +1,7 @@
 from tkinter import *
-from tkinter import Tk, Listbox, Button, Label, END, messagebox, font
+from tkinter import Listbox, END, messagebox
 from tkinter import filedialog
+from customtkinter import CTkButton, CTkLabel, CTkFont, CTk, CTkEntry, CTkScrollableFrame, CTkFrame
 
 import cfgmake, data, pack
 
@@ -9,8 +10,6 @@ import os, eyed3, sys
 cfgpath = None
 albumpath = None
 AlbumData = None
-
-
 
 class File:
     def OpenConfig():
@@ -42,20 +41,23 @@ class File:
             messagebox.showinfo(title="Album source", message="Album source directory is loaded")
 
 
-
+            
 
     def ChangeMusicNumbering():
-        window = Tk()
+        window = CTk()
+        window.configure(fg_color=BackgroundColor)
+
         window.title("Audio numbering")
+        window.resizable(False, False)
 
         if sys.platform.lower() == "darwin":
             pass
         else:
             window.iconbitmap(default="resources/icon.ico")
 
-        custom_font = font.Font(size=12)
+        # ("Open Sans", 12, 'bold') = CTkFont(size=12, family="Open Sans")
 
-        label = Label(window, text="Select a folder with audio files:", font=custom_font)
+        label = CTkLabel(window, text="Select a folder with audio files:", font=("Open Sans", 12, 'bold'), text_color=MinorColor)
         label.pack(pady=10)
 
         listbox = Listbox(
@@ -63,7 +65,7 @@ class File:
             selectmode="single",
             width=50,
             height=15,
-            font=custom_font,
+            font=("Open Sans", 12, 'bold'),
             selectbackground="blue",
             selectforeground="white",
             activestyle="none"
@@ -81,7 +83,7 @@ class File:
 
             if albumpath == None or albumpath == "":
                 folder_path = filedialog.askdirectory()
-                if not folder_path:
+                if folder_path == None or folder_path == "":
                     return
             
             else:
@@ -173,10 +175,10 @@ class File:
 
             messagebox.showinfo("Order Saved", "Track numbers have been successfully written to the metadata!")
 
-        select_button = Button(window, text="Select Folder", command=select_folder, font=custom_font)
+        select_button = CTkButton(window, text="Select Folder", command=select_folder, font=("Open Sans", 12, 'bold'), fg_color=AccentColor, hover_color="#292929", corner_radius=32, border_color=MinorColor, border_width=2)
         select_button.pack(pady=10)
 
-        save_button = Button(window, text="Save Order", command=save_order, font=custom_font)
+        save_button = CTkButton(window, text="Save Order", command=save_order, font=("Open Sans", 12, 'bold'), fg_color=AccentColor, hover_color="#292929", corner_radius=32, border_color=MinorColor, border_width=2)
         save_button.pack(pady=10)
 
         window.bind("<Up>", lambda event: move_up())
@@ -185,31 +187,22 @@ class File:
         window.bind("<Right>", lambda event: select_next())
 
         select_folder()
+        if folder_path == None or folder_path == "":
+            return
+        
         window.mainloop()
-
-
 
 
     def ExtractAlbum():
         AlbumPathOpen = filedialog.askopenfilename(title="Album file", filetypes=[("ALBUM Archive", ".album")])
 
-        while AlbumPathOpen == "" or AlbumPathOpen == None:
-            ask = messagebox.askyesno(title="Album File", message="You have not selected an album file. Do you want to select it again?")
-
-            if ask == False:
-                return
-            
-            AlbumPathOpen = filedialog.askopenfilename(title="Album file", filetypes=[("ALBUM Archive", ".album")])
+        if AlbumPathOpen == "" or AlbumPathOpen == None:
+            return
 
         AlbumPathOut = filedialog.askdirectory(title="Album file")
 
-        while AlbumPathOut == "" or AlbumPathOut == None:
-            ask = messagebox.askyesno(title="Album File", message="You have not selected an album extracting directory. Do you want to select it again?")
-
-            if ask == False:
-                return
-            
-            AlbumPathOut = filedialog.askdirectory(title="Album file")
+        if AlbumPathOut == "" or AlbumPathOut == None:
+            return
 
         pack.unpack(AlbumPathOpen, AlbumPathOut)
 
@@ -217,7 +210,9 @@ class File:
 class Make:
 
     def CreateAlbumConfig():
-        CfgWindow = Tk()
+        CfgWindow = CTk()
+
+        CfgWindow.configure(fg_color=BackgroundColor)
 
         if sys.platform.lower() == "darwin":
             pass
@@ -273,35 +268,35 @@ class Make:
             CfgWindow.destroy()
 
 
-        Label(CfgWindow, text="Artist:").grid(row=0, column=0, padx=10, pady=5, sticky="e")
-        artist_entry = Entry(CfgWindow, width=40)
+        CTkLabel(CfgWindow, text="Artist:", text_color=MinorColor).grid(row=0, column=0, padx=10, pady=5, sticky="e")
+        artist_entry = CTkEntry(CfgWindow, width=150)
         artist_entry.grid(row=0, column=1, padx=10, pady=5)
 
-        Label(CfgWindow, text="Author:").grid(row=1, column=0, padx=10, pady=5, sticky="e")
-        author_entry = Entry(CfgWindow, width=40)
+        CTkLabel(CfgWindow, text="Author:", text_color=MinorColor).grid(row=1, column=0, padx=10, pady=5, sticky="e")
+        author_entry = CTkEntry(CfgWindow, width=150)
         author_entry.grid(row=1, column=1, padx=10, pady=5)
 
-        Label(CfgWindow, text="Title:").grid(row=2, column=0, padx=10, pady=5, sticky="e")
-        title_entry = Entry(CfgWindow, width=40)
+        CTkLabel(CfgWindow, text="Title:", text_color=MinorColor).grid(row=2, column=0, padx=10, pady=5, sticky="e")
+        title_entry = CTkEntry(CfgWindow, width=150)
         title_entry.grid(row=2, column=1, padx=10, pady=5)
 
-        Label(CfgWindow, text="Year:").grid(row=3, column=0, padx=10, pady=5, sticky="e")
-        year_entry = Entry(CfgWindow, width=40)
+        CTkLabel(CfgWindow, text="Year:", text_color=MinorColor).grid(row=3, column=0, padx=10, pady=5, sticky="e")
+        year_entry = CTkEntry(CfgWindow, width=150)
         year_entry.grid(row=3, column=1, padx=10, pady=5)
 
-        Label(CfgWindow, text="Cover Path:").grid(row=4, column=0, padx=10, pady=5, sticky="e")
-        cover_path_entry = Entry(CfgWindow, width=40)
+        CTkLabel(CfgWindow, text="Cover Path:", text_color=MinorColor).grid(row=4, column=0, padx=10, pady=5, sticky="e")
+        cover_path_entry = CTkEntry(CfgWindow, width=150)
         cover_path_entry.grid(row=4, column=1, padx=10, pady=5)
-        Button(CfgWindow, text="Browse", command=select_cover).grid(row=4, column=2, padx=10, pady=5)
+        CTkButton(CfgWindow, border_width=2, text="Browse", command=select_cover, fg_color=AccentColor, hover_color="#292929", corner_radius=32, height=25, border_color=MinorColor).grid(row=4, column=2, padx=10, pady=5)
 
-        Label(CfgWindow, text="Output Path:").grid(row=5, column=0, padx=10, pady=5, sticky="e")
-        output_entry = Entry(CfgWindow, width=40)
+        CTkLabel(CfgWindow, text="Output Path:", text_color=MinorColor).grid(row=5, column=0, padx=10, pady=5, sticky="e")
+        output_entry = CTkEntry(CfgWindow, width=150)
         output_entry.grid(row=5, column=1, padx=10, pady=5)
-        Button(CfgWindow, text="Browse", command=select_output).grid(row=5, column=2, padx=10, pady=5)
+        CTkButton(CfgWindow, border_width=2, text="Browse", command=select_output, fg_color=AccentColor, hover_color="#292929", corner_radius=32, height=25, border_color=MinorColor).grid(row=5, column=2, padx=10, pady=5)
 
-        Button(CfgWindow, text="Make Config", command=save_to_list).grid(row=6, column=1, pady=10)
+        CTkButton(CfgWindow, border_width=2, text="Make Config", command=save_to_list, fg_color=AccentColor, hover_color="#292929", corner_radius=32, height=25, border_color=MinorColor).grid(row=6, column=1, pady=10)
 
-        Button(CfgWindow, text="Close", command=CfgWindow.destroy).grid(row=7, column=1, pady=10)
+        CTkButton(CfgWindow, border_width=2, text="Close", command=CfgWindow.destroy, fg_color=AccentColor, hover_color="#292929", corner_radius=32, height=25, border_color=MinorColor).grid(row=7, column=1, pady=10)
 
         CfgWindow.mainloop()
 
@@ -332,7 +327,9 @@ class Make:
 
 
 def main():
-    root = Tk()
+    root = CTk()
+    root.configure(fg_color=BackgroundColor)
+    # ("Open Sans", 12, 'bold') = CTkFont(size=12, family="Open Sans")
 
     root.title("Vinylla")
     root.geometry("450x300")
@@ -361,40 +358,43 @@ def main():
 
     root.config(menu=main_menu)
 
-    label1 = Label(
+    label1 = CTkLabel(
         root, 
         text="1. Open album folder", 
-        font=('Lexend', 14, 'bold'),
+        font=('Open Sans', 14, 'bold'),
         anchor='w',
-        padx=20
+        padx=20,
+        text_color=MinorColor
     )
     label1.pack(fill='x', pady=10)
 
-    label2 = Label(
+    label2 = CTkLabel(
         root, 
         text="2. Open config file (create if doesn't exist)", 
-        font=('Lexend', 14, 'bold'),
+        font=('Open Sans', 14, 'bold'),
         anchor='w',
-        padx=20
+        padx=20,
+        text_color=MinorColor
     )
     label2.pack(fill='x', pady=10)
 
-    label3 = Label(
+    label3 = CTkLabel(
         root, 
         text="3. Build the album!", 
-        font=('Lexend', 14, 'bold'),
+        font=('Open Sans', 14, 'bold'),
         anchor='w',
-        padx=20
+        padx=20,
+        text_color=MinorColor
     )
     label3.pack(fill='x', pady=10)
 
-    footer_label = Label(
+    footer_label = CTkLabel(
         root,
         text=f"the Vinylla Metadata Editor (VME) Version {version} {VersionType}",
-        font=('Lexend', 8, 'italic'),
-        fg='gray',
+        font=('Open Sans', 8, 'italic'),
         anchor='center',
-        pady=10
+        pady=10,
+        text_color=MinorColor
     )
     footer_label.pack(side='bottom', fill='x')
 
@@ -404,7 +404,14 @@ def main():
 
 
 if __name__ == "__main__":
-    version = "0.1"
+
+    # Theme vars
+    MinorColor = "#CDA47B"
+    BackgroundColor = "#382020"
+    AccentColor = "#9F4125"
+
+    # Version info
+    version = "0.2"
     VersionType = "beta"
 
     main()
