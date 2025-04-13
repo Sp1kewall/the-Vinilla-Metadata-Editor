@@ -23,5 +23,8 @@ or VME
 ### Python libs?
 
 > CustomTkinter - `pip install customtkinter`
+> 
 > eyed3 - `pip install eyed3`
+> 
 > PyYaml - `pip install PyYAML`
+> 
