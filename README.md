@@ -1,10 +1,10 @@
-# the Vinylla Metadata Editor
+# the Vinylla Metadata Editor 💽
 
 or VME
 
 *This is a simple audio file metadata editor to make creating music albums easier*
 
-### What can Vinylla do?
+### What can Vinylla do? 📝
 
 1. Edit music artist name
 
@@ -20,7 +20,7 @@ or VME
 
 ---
 
-### Python libs?
+### Python libs? 📚
 
 > CustomTkinter - `pip install customtkinter`
 > 
