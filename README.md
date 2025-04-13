@@ -19,8 +19,3 @@ or VME
 
 - GUI is not fully ready
 - "Vinylla" in beta actually 🥺
-
-
-
-*Version: 0.1 beta*
-
