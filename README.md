@@ -22,9 +22,9 @@ or VME
 
 ### Python libs?
 
-CustomTkinter - ```pip install customtkinter```
+CustomTkinter - `pip install customtkinter`
 
-eyed3 - ```pip install eyed3```
+eyed3 - `pip install eyed3`
 
-PyYaml - ```pip install PyYAML```
+PyYaml - `pip install PyYAML`
 
