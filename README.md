@@ -12,10 +12,3 @@ or VME
 4. Edit year of publication
 5. Edit audio file cover
 6. Packing album on atchive
-
----
-
-### Little issues:
-
-- GUI is not fully ready
-- "Vinylla" in beta actually 🥺
