@@ -55,8 +55,6 @@ class File:
         else:
             window.iconbitmap(default="resources/icon.ico")
 
-        # ("Open Sans", 12, 'bold') = CTkFont(size=12, family="Open Sans")
-
         label = CTkLabel(window, text="Select a folder with audio files:", font=("Open Sans", 12, 'bold'), text_color=MinorColor)
         label.pack(pady=10)
 
@@ -337,7 +335,7 @@ def main():
     if sys.platform.lower() == "darwin":
         pass
     else:
-        root.iconbitmap(default="resources/icon.ico")
+        root.wm_iconbitmap(default="./resources/icon.ico")
     
     root.resizable(False, False)
 
