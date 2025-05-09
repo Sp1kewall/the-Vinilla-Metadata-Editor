@@ -1,6 +1,16 @@
 import yaml
 
 class Album:
+    """
+    Class representing an album with metadata.
+    Attributes:
+        name (str): Name of the album.
+        year (int): Year of release.
+        author (str): Author of the album.
+        picture (str): Path to the album cover image.
+        albumartist (str): Album artist.
+    """
+#     __slots__ = ['name', 'year', 'author', 'picture', 'albumartist']
     AudioExtensions = [
     ".mp3",  # MPEG Audio Layer III
     ".wav",  # Waveform Audio File Format
@@ -37,11 +47,10 @@ class Album:
 
 
 
-    def __init__(self, name: str = None, year: int = None, author: str = None, picture: str = None, albumartist: str = None):
+    def __init__(self, name: str = None, year: int = None, author: str = None, picture: str = None):
         self.name = name
         self.year = year
         self.picture = picture
-        self.albumartist = albumartist
 
         if author is None:
             self.author = ""
@@ -53,22 +62,31 @@ class Album:
 
     def __repr__(self):
         return f'{self.__class__.__name__}(name={self.name}, year={self.year}, \
-                  author={self.author}, picture={self.picture}, albumartist={self.albumartist}'
+                  author={self.author}, picture={self.picture}'
 
 
 
 
-    def GetInfo(Path):
+    def GetInfo(Path: str):
+        """
+        Reads album information from a YAML file.
+        Args:
+            Path (str): Path to the YAML file.
+        Returns:
+            Album: An instance of the Album class with metadata.
+        """
 
         with open(Path, "r") as Data:
             print(Path)
 
             work = yaml.load(Data, Loader=yaml.FullLoader)
-
             name = work.get("name")
             year = work.get("year")
             author = work.get("author")
-            picture = work.get("picture")
-            albumartist = work.get("albumartist")
 
-            return Album(name, year, author, picture, albumartist)
+            if work.get("picture") != 'not_exists':
+                picture = work.get("picture")
+            else:
+                picture = None
+
+            return Album(name, year, author, picture)

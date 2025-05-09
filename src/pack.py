@@ -3,7 +3,16 @@ import data
 from tkinter import messagebox
 import eyed3
 
+# This module is responsible for packing and unpacking albums into a zip file.
 def FileExtension(filename: str) -> str | None:
+    """
+    Returns the file extension of a given filename.
+    Args:
+        filename (str): The name of the file.
+    Returns:
+        The file extension if it exists, otherwise None.
+    """
+
     tmp = os.path.splitext(filename)
 
     if len(tmp) < 2:
@@ -13,6 +22,16 @@ def FileExtension(filename: str) -> str | None:
          return tmp[-1]
 
 def pack(Album: str = None, Output: str = None, ConfigPath: str = None) -> bool:
+        """
+        Packs an album into a zip file.
+        Args:
+            Album (str): The path to the album to be packed.
+            Output (str): The path where the packed album will be saved.
+            ConfigPath (str): The path to the configuration file.
+        Returns:
+            bool: True if the packing was successful, False otherwise.
+        """
+
         if Album == None:
             print("Album import path not specified")
             return False
@@ -41,12 +60,12 @@ def pack(Album: str = None, Output: str = None, ConfigPath: str = None) -> bool:
                             if audiofile.tag is None:
                                 ErrorFiles.append(file)
 
-                            audiofile.tag.artist = info.author
                             audiofile.tag.album = info.name
-                            audiofile.tag.album_artist = info.albumartist
+                            audiofile.tag.album_artist = info.author
                             audiofile.tag.title = os.path.splitext(file)[0]
-
-                            audiofile.tag.images.set(3, open(info.picture, 'rb').read(), 'image/jpeg')
+                            
+                            if info.picture != None:
+                                audiofile.tag.images.set(3, open(info.picture, 'rb').read(), 'image/jpeg')
 
                             audiofile.tag.save()
 
